@@ -18,8 +18,6 @@ class NewVisitorTest(unittest.TestCase):
 		self.assertIn('To-do', self.browser.title)
 		self.fail('Finish the test!')
 
-
-
 		# User invited to enter to do item straight away
 
 		# User hits enter, page updates right away
