@@ -36,18 +36,22 @@ class NewVisitorTest(unittest.TestCase):
 
 		table = self.browser.find_element_by_id('id_list_table')
 		rows = table.find_elements_by_tag_name('tr')
-		self.assertTrue(
-			any(row.text == '1: Buy peacock feathers' for row in rows),
-			"New to-do item did not appear in table"	
-		)
+		self.assertIn('1: Buy peacock feathers', [row.text for row in rows])
 
 		# Text box remains to add another item
 		# User enters another to do item
-		self.fail('Finish the test')
+		inputbox = self.browser.find_element_by_id('id_new_item')
+		inputbox.send_keys('Use peacock feathers to make a new fly')
+		inputbox.send_keys(Keys.ENTER)
 
 		# Page updates to show both items, text box remains
+		table = self.browser.find_element_by_id('id_list_table')
+		rows = table.find_elements_by_tag_name('tr')
+		self.assertIn('1: Buy peacock feathers', [row.text for row in rows])
+		self.assertIn('2: Use peacock feathers to make a new fly', [row.text for row in rows])
 
 		# User gets unique URL for list, text explaining URL
+		self.fail('Finish the test')
 
 		# User checks the URL, the list exists
 if __name__ == '__main__':
